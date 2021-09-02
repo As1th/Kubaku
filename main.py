@@ -1,6 +1,6 @@
 import os
 import discord
-
+heroku buildpacks:set heroku/python
 TOKEN = os.environ['TOKEN']
 client = discord.Client()
 
