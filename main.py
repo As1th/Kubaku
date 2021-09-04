@@ -26,8 +26,14 @@ async def on_message(message):
     cc2 = ":octagonal_sign:  *Custom Color 2* - Adding another form for each Spectrobe would be an exponential amount of work and would slow down developement considerably. With over 100 species planned, 300 forms is a bit too pressing both in time and memory. It would also require different Chroma minerals being mapped to different CCs, whereas the current solution is simple and unintrusive internally."
     origins = ":octagonal_sign:  *Spectrobes from Origins* - Mainly due to sprites. The 3D quality of the DS models translate 'acceptably' into sprites due to their low polys and colours, but the Wii models would look worse. I would also prefer to limit scope here anyway. This a demake of Spec1, so I think the handful of BtP Spectrobes are enough of a bonus."
 
-    
-
+    if message.content.startswith('!greenlist'):
+       await message.channel.send("**The Green Feature List**\n"
+"This is a list of common feature requests that are already confirmed and planned to be added eventually!\n"
+":white_check_mark:  *Every Spec1 Spectrobe and Krawl*\n"
+":white_check_mark:  *Full Story + Postgame Geo Vortexes*\n"
+":white_check_mark:  *A more notable use of Minerals (EV training via Minerals, with altered data values and a way to actually see EVs)*\n"
+":white_check_mark:  *Incubation System (Based on Daycare System)*"
+)
     if message.content.startswith('!redlist'):
         if message.content.startswith('!redlist EXC') or message.content.startswith('!redlist exc') :
            await message.channel.send(exc)
