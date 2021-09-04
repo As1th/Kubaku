@@ -1,4 +1,5 @@
 import os
+from keep_alive import keep_alive
 import discord
 TOKEN = os.environ['TOKEN']
 client = discord.Client()
@@ -6,15 +7,17 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('Logged in as {0.user}'.format(client))
 
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.content.startswith('!Kubaku'):
-        await message.channel.send("Want me to do something?\n")
+    if message.content.startswith('!Kubaku') or message.content.startswith('!kubaku') or message.content.startswith('!KUBAKU'):
+        await message.channel.send("Hi!\nWant me to do something for you? I can:\n"
+        "``!greenlist`` - Display a list of common feature requests are confirmed and planned to be added.\n"
+        "``!redlist`` - Display a list of common feature requests that will NOT be in the game due to various restrictions.\n")
         return
 
     exc = ":octagonal_sign:  *Excavation System* - Unfortunately far too much work to implement a custom system for this, especially since a GBA excavation system would lack the touch screen that made the original so immersive. A system like in Pokemon D/P/Pt's 'Underground' would honestly get very tedious to have to do at every dig, and is more trouble than it's worth."
@@ -60,5 +63,5 @@ async def on_message(message):
 ":octagonal_sign:  *Spectrobes from Origins* - ``!redlist ORIGINS`` for why."
 )
 
-
+keep_alive()
 client.run(os.getenv('TOKEN'))
