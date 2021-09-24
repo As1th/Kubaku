@@ -73,8 +73,9 @@ async def on_message(message):
                                      description="This is a list of common feature requests that are already confirmed and planned to be added eventually!\n\n"
 ":white_check_mark:  *Every Spec1 Spectrobe and Krawl*\n"
 ":white_check_mark:  *Full Story + Postgame Geo Vortexes*\n"
-":white_check_mark:  *A more notable use of Minerals (EV training via Minerals, with altered data values and a way to actually see EVs)*\n"
-":white_check_mark:  *Incubation System (Based on Daycare System)*", color=0x00ff00)
+":white_check_mark:  *A more notable use of Minerals (EV training only via Minerals, with altered values and a way to actually see EVs)*\n"
+":white_check_mark:  *Incubation System (Later game mechanic, with function closer to a daycare.)*\n----------------\n"
+":white_check_mark: Next Major Content Update: 0.3 - Delivering the Keystone on Nessa.", color=0x00ff00)
         await message.channel.send(embed=embedvar)
         return
       
@@ -123,6 +124,7 @@ async def on_message(message):
 ":octagonal_sign:  *Spectrobes from Origins* - ``!redlist ORIGINS`` for why.", color=0xfe0000)
           await message.channel.send(embed=embedvar)
           return 
+
 # Assign the role when the role is added as a reaction to the message.
 @client.event
 async def on_raw_reaction_add(payload):
@@ -131,17 +133,9 @@ async def on_raw_reaction_add(payload):
     # channel and message IDs should be integer:
     if payload.channel_id == 844899391793659954 and payload.message_id == 757114312413151272:
         if str(payload.emoji) == "<:Apex:745425965764575312>":
-            role = get(payload.member.guild.roles, name='Apex')
+            role = get(payload.member.guild.roles, name='Polls')
         elif str(payload.emoji) == "<:WarThunder:745425772944162907>":
-            role = get(payload.member.guild.roles, name='War Thunder')
-        elif str(payload.emoji) == "<:ModernWarfare:757104623738814554>":
-            role = get(payload.member.guild.roles, name='Modern Warfare')
-        elif str(payload.emoji) == "<:R6Siege:757030019909550122>":
-            role = get(payload.member.guild.roles, name='R6 Siege')
-        elif str(payload.emoji) == "<:Minecraft:757029546632413346>":
-            role = get(payload.member.guild.roles, name='Minecraft')
-        elif str(payload.emoji) == "<:AmongUs:760192601625591859>":
-            role = get(payload.member.guild.roles, name='Among Us')
+            role = get(payload.member.guild.roles, name='News')
         else:
             role = get(guild.roles, name=payload.emoji)
 
