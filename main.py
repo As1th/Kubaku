@@ -22,6 +22,10 @@ async def on_ready():
 #    await member.dm_channel.send(
 #        f'Hi {member.name}, welcome to my Discord server!'
 #    )
+@client.event 
+async def on_member_join(member):
+    channel = client.get_channel(844898674735185950)
+    await channel.send(f"Welcome to Spectrobes GBA {member.mention} :)\nCheck out <#844899391793659954> if you want to be pinged for game updates!")
 
 @client.event
 async def on_message(message):
@@ -32,32 +36,35 @@ async def on_message(message):
     if message.content.startswith('!Kubaku') or message.content.startswith('!kubaku') or message.content.startswith('!KUBAKU'):
         await message.channel.send("Hi!\nWant me to do something for you? I can:\n")
         embedvar = discord.Embed(title="",
-                                     description="``!greenlist`` - Display a list of common feature requests are confirmed and planned to be added.\n"
-        "``!redlist`` - Display a list of common feature requests that will NOT be in the game due to various restrictions.\n", color=0x11d30e)
+                                     description="`!greenlist` - Display a list of common feature requests that are confirmed and planned to be added.\n"
+        "`!redlist` - Display a list of common feature requests that will NOT be in the game due to various restrictions.\n", color=0x11d30e)
         await message.channel.send(embed=embedvar)
         return
     
     if message.channel.id == 844899391793659954:
         if message.content.startswith('!roles'):
-            embedvar = discord.Embed(title="React to this message to get your roles!",
-                                     description="Click the corresponding emoji to receive your role.\n<:WarThunder:"
-                                                 "745425772944162907> - War Thunder\n<:Apex:745425965764575312> - "
-                                                 "Apex\n<:ModernWarfare:757104623738814554> - "
-                                                 "Modern Warfare\n<:Minecraft:757029546632413346> - "
-                                                 "Minecraft\n<:R6Siege:757030019909550122> - R6 Siege", color=0x00ff00)
+            embedvar = discord.Embed(title="React to this message to set your notifiation roles!",
+                                     description="Since no one likes an '@ everyone', you may opt into these rolls to choose if you want to be notified on this server:\n\n"
+                                     "React with :bar_chart: to be added to **Polls**.\n"
+                                     "*I will occasionally create community polls so people can vote on things being changed or added to the game. Everyone can participate in these polls, but the Polls usergroup will be notified whenever I create a poll.*\n\n"
+                                     "React with :camera_with_flash: to be added to **News**.\n"
+                                     "*The News usergroup will be notified whenever there is a large development news post. This could be an update release or a big milestone in the development cycle.*\n\n"
+                                     
+                                     , color=0x00fe00)
             await message.channel.send(embed=embedvar)
-            print("Changed message embed color.")
+            print("Sent notif roles.")
             return
-        elif message.content.startswith('update'):
-            embedvar2 = discord.Embed(title="React to this message to get your roles!",
-                                      description="Click the corresponding emoji to receive your role.\n<:WarThunder:"
-                                                  "745425772944162907> - War Thunder\n<:Apex:745425965764575312> - "
-                                                  "Apex\n<:ModernWarfare:757104623738814554> - "
-                                                  "Modern Warfare\n<:Minecraft:757029546632413346> - "
-                                                  "Minecraft\n<:R6Siege:757030019909550122> - R6 Siege\n"
-                                                  "<:AmongUs:760192601625591859> - Among Us", color=0x00ff00)
+        elif message.content.startswith('!update'):
+            embedvar2 = discord.Embed(title="React to this message to set your notifiation roles!",
+                                     description="Since no one likes an '@ everyone', you may opt into these rolls to choose if you want to be notified on this server:\n\n"
+                                     "React with :bar_chart: to be added to **Polls**.\n"
+                                     "*I will occasionally create community polls so people can vote on things being changed or added to the game. Everyone can participate in these polls, but the Polls usergroup will be notified whenever I create a poll.*\n\n"
+                                     "React with :camera_with_flash: to be added to **News**.\n"
+                                     "*The News usergroup will be notified whenever there is a large development news post. This could be an update release or a big milestone in the development cycle.*\n\n"
+                                     
+                                     , color=0x00fe00)
             channel = client.get_channel(844899391793659954)
-            msg = await channel.fetch_message(757114312413151272)
+            msg = await channel.fetch_message(891675809734090773)
             await msg.edit(embed=embedvar2)
             print("Updated role reaction message.")
             return
@@ -73,7 +80,7 @@ async def on_message(message):
                                      description="This is a list of common feature requests that are already confirmed and planned to be added eventually!\n\n"
 ":white_check_mark:  *Every Spec1 Spectrobe and Krawl*\n"
 ":white_check_mark:  *Full Story + Postgame Geo Vortexes*\n"
-":white_check_mark:  *A more notable use of Minerals (EV training only via Minerals, with altered values and a way to actually see EVs)*\n"
+":white_check_mark:  *A more notable use of Minerals (EV training only via Minerals, with altered values and a way to actually see EVs.)*\n"
 ":white_check_mark:  *Incubation System (Later game mechanic, with function closer to a daycare.)*\n----------------\n"
 ":white_check_mark: Next Major Content Update: 0.3 - Delivering the Keystone on Nessa.", color=0x00ff00)
         await message.channel.send(embed=embedvar)
@@ -116,57 +123,54 @@ async def on_message(message):
         else:
           embedvar = discord.Embed(title="**The Red Feature List**",
                                      description="This is a list of features that are NOT planned to be implemented. Discussion of these is still welcome, but most are barred due to scope and other unavoidable restrictions.\n"
-                                     "**(See pinned messages for all explanations).**\n\n"
-":octagonal_sign:  *Excavation System* - ``!redlist EXC`` for why.\n"                                    
-":octagonal_sign:  *Awakening System* - ``!redlist AWK`` for why.\n"
-":octagonal_sign:  *Custom Parts* - ``!redlist CP`` for why.\n"
-":octagonal_sign:  *Custom Color 2* - ``!redlist CC2`` for why.\n"
-":octagonal_sign:  *Spectrobes from Origins* - ``!redlist ORIGINS`` for why.", color=0xfe0000)
+                                     "**(See pinned messages in #feature-requests for all explanations).**\n\n"
+":octagonal_sign:  *Excavation System* - `!redlist EXC` for why.\n"                                    
+":octagonal_sign:  *Awakening System* - `!redlist AWK` for why.\n"
+":octagonal_sign:  *Custom Parts* - `!redlist CP` for why.\n"
+":octagonal_sign:  *Custom Color 2* - `!redlist CC2` for why.\n"
+":octagonal_sign:  *Spectrobes from Origins* - `!redlist ORIGINS` for why.", color=0xfe0000)
           await message.channel.send(embed=embedvar)
           return 
 
-# Assign the role when the role is added as a reaction to the message.
+# Assign the role when the emoji is added as a reaction to the message.
 @client.event
 async def on_raw_reaction_add(payload):
     guild = client.get_guild(payload.guild_id)
     member = get(guild.members, id=payload.user_id)
     # channel and message IDs should be integer:
-    if payload.channel_id == 844899391793659954 and payload.message_id == 757114312413151272:
-        if str(payload.emoji) == "<:Apex:745425965764575312>":
+    if payload.channel_id == 844899391793659954 and payload.message_id == 891675809734090773:
+        if payload.emoji.name == "📊":
             role = get(payload.member.guild.roles, name='Polls')
-        elif str(payload.emoji) == "<:WarThunder:745425772944162907>":
+        elif payload.emoji.name == "📸":
             role = get(payload.member.guild.roles, name='News')
         else:
-            role = get(guild.roles, name=payload.emoji)
-
+            role = None
+            print(f"bad emoji added")
         if role is not None:
             await payload.member.add_roles(role)
+            await member.send(f"I added you to *{role}* in Spectrobes GBA!")
             print(f"Assigned {member} to {role}.")
 
 
-# Assign the role when the role is added as a reaction to the message.
+# Remove the role when the emoji is removed as a reaction to the message.
 @client.event
 async def on_raw_reaction_remove(payload):
     guild = client.get_guild(payload.guild_id)
     member = get(guild.members, id=payload.user_id)
-    if payload.channel_id == 844899391793659954 and payload.message_id == 757114312413151272:
-        if str(payload.emoji) == "<:Apex:745425965764575312>":
-            role = get(guild.roles, name='Apex')
-        elif str(payload.emoji) == "<:WarThunder:745425772944162907>":
-            role = get(guild.roles, name='War Thunder')
-        elif str(payload.emoji) == "<:ModernWarfare:757104623738814554>":
-            role = get(guild.roles, name='Modern Warfare')
-        elif str(payload.emoji) == "<:R6Siege:757030019909550122>":
-            role = get(guild.roles, name='R6 Siege')
-        elif str(payload.emoji) == "<:Minecraft:757029546632413346>":
-            role = get(guild.roles, name='Minecraft')
-        elif str(payload.emoji) == "<:AmongUs:760192601625591859>":
-            role = get(guild.roles, name='Among Us')
+    if payload.channel_id == 844899391793659954 and payload.message_id == 891675809734090773:
+        if payload.emoji.name == "📊":
+            role = get(guild.roles, name='Polls')
+        elif payload.emoji.name == "📸":
+            role = get(guild.roles, name='News')
+  
         else:
-            role = discord.utils.get(guild.roles, name=payload.emoji)
-
+            role = None
+            print(f"bad emoji removed")
+            
         if role is not None:
             await member.remove_roles(role)
+          
+            await member.send(f"I removed you from *{role}* in Spectrobes GBA!")
             print(f"Removed {role} from {member}.")
     
     
